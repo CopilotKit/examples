@@ -9,12 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@copilotkit/react-core": "1.1.1-feat-runtime-remote-actions.5",
+    "@copilotkit/react-ui": "1.1.1-feat-runtime-remote-actions.5",
+    "@copilotkit/runtime": "1.1.1-feat-runtime-remote-actions.5",
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.31",
     "lucide-react": "^0.436.0",
     "next": "14.2.6",
+    "openai": "^4.57.0",
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.5.2",
