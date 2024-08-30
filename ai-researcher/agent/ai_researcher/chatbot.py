@@ -33,17 +33,25 @@ async def chatbot_node(state: AgentState, config: RunnableConfig):
 You are a search assistant. Your task is to help the user with complex search queries by breaking the down into smaller tasks.
 
 These subtasks are then executed serially. In the end, a final answer is produced in markdown format.
+
+
 """
 
     # use the openai tool format to get access to enums
     search_tool = {
         'name': 'search',
-        'description': """Break the user's query into smaller tasks.""",
+        'description': """
+Break the user's query into smaller tasks.
+
+Use task type "search" to search the web for information.
+
+Make sure to add all the tasks needed to answer the user's query.
+""",
         'parameters': {
             'type': 'object',
             'properties': {
                 'tasks': {
-                    'description': """The tasks to be executed. As many as needed, no more no less.""",
+                    'description': """The tasks to be executed.""",
                     'type': 'array',
                     'items': {
                         'type': 'object',
@@ -53,7 +61,7 @@ These subtasks are then executed serially. In the end, a final answer is produce
                                 'type': 'string'
                             },
                             'description': {
-                                'description': 'The description of the task, i.e. "search for information about the latest AI news".',
+                                'description': 'The description of the task, i.e. "search for information about the latest AI news"',
                                 'type': 'string'
                             },
                             'status': {

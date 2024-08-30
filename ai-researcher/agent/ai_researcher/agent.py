@@ -32,7 +32,6 @@ workflow = StateGraph(AgentState)
 workflow.add_node("chatbot_node", chatbot_node)
 workflow.add_node("search_node", search_node)
 workflow.add_node("summarize_node", summarize_node)
-
 # Chatbot
 workflow.set_entry_point("chatbot_node")
 

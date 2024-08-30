@@ -59,9 +59,21 @@ This is what you need to search for, please come up with a good search query: {c
     system_message = f"""
 This task was just executed: {json.dumps(current_task)}
 
-This is the result of the search: {tool_msg}
+This is the result of the search: 
 
-Please summarize the result of the search and include all relevant information and reference links.
+{tool_msg}
+
+Please summarize the ONLY the result of the search and include all relevant information from the search and reference links.
+
+DO NOT INCLUDE ANY EXTRA INFORMATION. ALL OF THE INFORMATION YOU ARE LOOKING FOR IS IN THE SEARCH RESULTS.
+
+DO NOT answer the user's query yet. Just summarize the search results.
+
+Use markdown formatting and put the references inline and the links at the end.
+Like this:
+This is a sentence with a reference to a source [source 1][1] and another reference [source 2][2].
+[1]: http://example.com/source1 "Title of Source 1"
+[2]: http://example.com/source2 "Title of Source 2"
 """
 
     response = await ChatOpenAI(model="gpt-4o").ainvoke([
