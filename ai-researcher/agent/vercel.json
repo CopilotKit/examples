@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "build": {
     "env": {
       "POETRY_VERSION": "1.7.1"
@@ -6,12 +7,17 @@
   },
   "builds": [
     {
-      "src": "demo.py",
+      "src": "ai_researcher/demo.py",
       "use": "@vercel/python",
       "config": {
         "runtime": "python3.12",
-        "maxLambdaSize": "15mb"
       }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "ai_researcher/demo.py"
     }
   ]
 }
