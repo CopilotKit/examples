@@ -1,0 +1,17 @@
+{
+  "build": {
+    "env": {
+      "POETRY_VERSION": "1.7.1"
+    }
+  },
+  "builds": [
+    {
+      "src": "demo.py",
+      "use": "@vercel/python",
+      "config": {
+        "runtime": "python3.12",
+        "maxLambdaSize": "15mb"
+      }
+    }
+  ]
+}
