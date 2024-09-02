@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 import { CornerDownLeftIcon } from "lucide-react";
 import { useResearchContext } from "@/lib/research-provider";
 import { motion } from "framer-motion";
-import { useCopilotChat } from "@copilotkit/react-core";
+import { useCoagent, useCopilotChat } from "@copilotkit/react-core";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 
 const MAX_INPUT_LENGTH = 250;
@@ -18,14 +18,17 @@ export function HomeView() {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const { appendMessage } = useCopilotChat();
 
-  const handleResearch = () => {
-    setResearchQuery(researchInput);
+  const handleResearch = (query: string) => {
+    setResearchQuery(query);
     appendMessage(new TextMessage({
-      content: `Here is the user's query: "${researchInput}"`,
+      content: query,
       role: Role.User,
     }));
   };
 
+  const { state: researcherState, setState: setResearcherState } = useCoagent({ name: "search_agent", });
+
+  console.log("state[home]", researcherState);
   const suggestions = [
     { label: "Electric cars sold in 2024", icon: "🚙" },
     { label: "Top 10 richest people in the world", icon: "💰" },
@@ -61,7 +64,7 @@ export function HomeView() {
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
-              handleResearch();
+              handleResearch(researchInput);
             }
           }}
           maxLength={MAX_INPUT_LENGTH}
@@ -81,7 +84,7 @@ export function HomeView() {
               "opacity-0 pointer-events-none": !researchInput,
               "opacity-100": researchInput,
             })}
-            onClick={handleResearch}
+            onClick={() => handleResearch(researchInput)}
           >
             Research
             <CornerDownLeftIcon className="w-4 h-4 ml-2" />
@@ -92,7 +95,7 @@ export function HomeView() {
         {suggestions.map((suggestion) => (
           <div
             key={suggestion.label}
-            onClick={() => setResearchQuery(suggestion.label)}
+            onClick={() => handleResearch(suggestion.label)}
             className="p-2 bg-slate-100/50 rounded-md border flex cursor-pointer items-center space-x-2 hover:bg-slate-100 transition-all duration-300"
           >
             <span className="text-base">{suggestion.icon}</span>

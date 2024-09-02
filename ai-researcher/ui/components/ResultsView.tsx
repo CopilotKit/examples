@@ -15,6 +15,9 @@ import { useCoagent } from "@copilotkit/react-core";
 export function ResultsView() {
   const { researchQuery, setResearchQuery, isLoading, researchResult } =
     useResearchContext();
+  const { state: researcherState, setState: setResearcherState } = useCoagent({ name: "search_agent", });
+  
+  console.log("state", researcherState);
 
   return (
     <motion.div
