@@ -18,7 +18,6 @@ export default function Home() {
         <ResearchProvider>
           <ResearchWrapper />
         </ResearchProvider>
-        <CopilotPopup defaultOpen={true} />
       </CopilotKit>
     </main>
   );

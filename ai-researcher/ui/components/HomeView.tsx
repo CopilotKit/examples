@@ -27,10 +27,10 @@ export function HomeView() {
   };
 
   const suggestions = [
-    { label: "Electric cars sold in 2024", icon: "🚙" },
+    { label: "Electric cars sold in 2024 vs 2023", icon: "🚙" },
     { label: "Top 10 richest people in the world", icon: "💰" },
     { label: "Population of the World", icon: "🌍 " },
-    { label: "Best stocks in 2024", icon: "📈" },
+    { label: "Weather in Seattle VS New York", icon: "⛅️" },
   ];
 
   return (
@@ -41,7 +41,7 @@ export function HomeView() {
       transition={{ duration: 0.4 }}
       className="h-full w-full flex flex-col gap-y-2 justify-center items-center"
     >
-      <h1 className="text-4xl font-extralight mb-6">Where knowledge begins</h1>
+      <h1 className="text-4xl font-extralight mb-6">What would you like to know?</h1>
 
       <div
         className={cn(
