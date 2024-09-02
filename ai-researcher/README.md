@@ -44,3 +44,10 @@ pnpm run dev
 ## Usage
 
 Navigate to [http://localhost:3000](http://localhost:3000).
+
+
+# LangGraph Studio
+
+Run LangGraph studio, then load the `ai-researcher/agent` folder into it.
+
+Make sure to create teh `.env` mentioned above first!
