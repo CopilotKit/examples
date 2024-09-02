@@ -17,6 +17,9 @@ importers:
       '@copilotkit/runtime':
         specifier: 1.1.1-feat-runtime-remote-actions.5
         version: 1.1.1-feat-runtime-remote-actions.5(class-validator@0.14.1)(ignore@5.3.2)
+      '@copilotkit/runtime-client-gql':
+        specifier: 1.1.1-feat-runtime-remote-actions.5
+        version: 1.1.1-feat-runtime-remote-actions.5(ignore@5.3.2)(react@18.3.1)
       '@radix-ui/react-slot':
         specifier: ^1.1.0
         version: 1.1.0(@types/react@18.3.4)(react@18.3.1)

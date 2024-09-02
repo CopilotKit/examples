@@ -7,6 +7,8 @@ import { Button } from "./ui/button";
 import { CornerDownLeftIcon } from "lucide-react";
 import { useResearchContext } from "@/lib/research-provider";
 import { motion } from "framer-motion";
+import { useCopilotChat } from "@copilotkit/react-core";
+import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 
 const MAX_INPUT_LENGTH = 250;
 
@@ -14,9 +16,14 @@ export function HomeView() {
   const { setResearchQuery, researchInput, setResearchInput } =
     useResearchContext();
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const { appendMessage } = useCopilotChat();
 
   const handleResearch = () => {
     setResearchQuery(researchInput);
+    appendMessage(new TextMessage({
+      content: `Here is the user's query: "${researchInput}"`,
+      role: Role.User,
+    }));
   };
 
   const suggestions = [

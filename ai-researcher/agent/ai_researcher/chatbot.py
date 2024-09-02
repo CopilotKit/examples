@@ -17,7 +17,6 @@ async def chatbot_node(state: AgentState, config: RunnableConfig):
     The chatbot is responsible for answering the user's questions and building the query.
     """
 
-
     config = configure_copilotkit(
         config,
         emit_messages=True,

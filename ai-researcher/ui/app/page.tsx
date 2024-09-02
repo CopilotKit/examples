@@ -4,13 +4,22 @@ import { HomeView } from "@/components/HomeView";
 import { ResultsView } from "@/components/ResultsView";
 import { ResearchProvider, useResearchContext } from "@/lib/research-provider";
 import { AnimatePresence } from "framer-motion";
+import { CopilotKit } from "@copilotkit/react-core";
+import { CopilotPopup } from "@copilotkit/react-ui";
+import "@copilotkit/react-ui/styles.css";
 
 export default function Home() {
   return (
     <main className="flex h-screen flex-col items-center justify-between">
-      <ResearchProvider>
-        <ResearchWrapper />
-      </ResearchProvider>
+      <CopilotKit
+        agent="search_agent"
+        runtimeUrl="http://localhost:3000/api/copilotkit"
+      >
+        <ResearchProvider>
+          <ResearchWrapper />
+        </ResearchProvider>
+        <CopilotPopup defaultOpen={true} />
+      </CopilotKit>
     </main>
   );
 }

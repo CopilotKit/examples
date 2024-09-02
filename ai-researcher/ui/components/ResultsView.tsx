@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { SkeletonLoader } from "./SkeletonLoader";
 import { Button } from "./ui/button";
+import { useCoagent } from "@copilotkit/react-core";
 
 export function ResultsView() {
   const { researchQuery, setResearchQuery, isLoading, researchResult } =
