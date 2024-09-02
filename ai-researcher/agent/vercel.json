@@ -10,7 +10,7 @@
       "src": "ai_researcher/demo.py",
       "use": "@vercel/python",
       "config": {
-        "runtime": "python3.12",
+        "runtime": "python3.12"
       }
     }
   ],
