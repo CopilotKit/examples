@@ -31,19 +31,6 @@ export const ResearchProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [researchQuery, researchResult]);
 
-  useEffect(() => {
-    if (researchQuery) {
-      setIsLoading(true);
-      setTimeout(() => {
-        setIsLoading(false);
-        setResearchResult({
-          answer: "The numbers of Tesla Model 3 cars sold in 2024 is 100,000.",
-          sources: ["https://tesla.com", "https://cnet.com"],
-        });
-      }, 3000);
-    }
-  }, [researchQuery]);
-
   return (
     <ResearchContext.Provider
       value={{

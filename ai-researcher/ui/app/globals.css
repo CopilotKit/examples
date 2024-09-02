@@ -66,4 +66,44 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .markdown-wrapper {
+    @apply text-slate-900 space-y-2;
+
+    h1 {
+      @apply text-2xl mb-2 mt-4 font-medium;
+    }
+
+    h2 {
+      @apply text-xl mb-2 mt-4 font-medium;
+    }
+
+    h3 {
+      @apply text-xl mb-2 mt-4 font-medium;
+    }
+
+    h4 {
+      @apply text-lg mb-2 mt-4 font-medium;
+    }
+
+    a {
+      @apply underline font-semibold;
+    }
+
+    ul {
+      @apply list-disc pl-5 mb-1;
+    }
+
+    ol {
+      @apply list-decimal pl-5 mb-1;
+    }
+
+    strong {
+      @apply font-medium;
+    }
+
+    li {
+      @apply mb-1;
+    }
+  }
 }

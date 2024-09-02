@@ -4,7 +4,7 @@ The summarize node is responsible for summarizing the information.
 
 import json
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import SystemMessage
+from langchain_core.messages import SystemMessage, ToolMessage
 from langchain_core.runnables import RunnableConfig
 from copilotkit.langchain import configure_copilotkit
 
@@ -18,23 +18,57 @@ async def summarize_node(state: AgentState, config: RunnableConfig):
     config = configure_copilotkit(
         config,
         emit_messages=True,
+        emit_state={
+            "answer": {
+                "tool": "summarize"
+            },
+        }
     )
 
     system_message = f"""
-The system has performed a series of tasks to answer the user's query.
-These are all of the tasks: {json.dumps(state["tasks"])}
+The system has performed a series of steps to answer the user's query.
+These are all of the steps: {json.dumps(state["steps"])}
 
-Please summarize the result the final result and include all relevant information and reference links.
-
-Use markdown formatting and put the references inline and the links at the end.
-
-Like this:
-This is a sentence with a reference to a source [source 1][1] and another reference [source 2][2].
-[1]: http://example.com/source1 "Title of Source 1"
-[2]: http://example.com/source2 "Title of Source 2"
+Please summarize the final result and include all relevant information and reference links.
 """
 
-    response = await ChatOpenAI(model="gpt-4o").ainvoke([
+    summarize_tool = {
+        'name': 'summarize',
+        'description': """
+Summarize the final result. Make sure that the summary is complete and includes all relevant information and reference links.
+""",
+        'parameters': {
+            'type': 'object',
+            'properties': {
+                'markdown': {
+                    'description': 'The markdown formatted summary of the final result. If you add any headings, make sure to start at the top level (#)',
+                    'type': 'string'
+                },
+                'references': {
+                    'description': """A list of references.""",
+                    'type': 'array',
+                    'items': {
+                        'type': 'object',
+                        'properties': {
+                            
+                            'title': {
+                                'description': 'The title of the reference.',
+                                'type': 'string'
+                            },
+                            'url': {
+                                'description': 'The url of the reference.',
+                                'type': 'string'
+                            },
+                        },
+                        'required': ['title', 'url']
+                    }
+                }
+            },
+            'required': ['markdown', 'references']
+        }
+    }
+
+    response = await ChatOpenAI(model="gpt-4o").bind_tools([summarize_tool], parallel_tool_calls=False, tool_choice="summarize").ainvoke([
         *state["messages"],
         SystemMessage(
             content=system_message
@@ -42,11 +76,13 @@ This is a sentence with a reference to a source [source 1][1] and another refere
     ], config)
 
     return {
-        "messages": [
-            SystemMessage(
-                content=system_message
-            ),
-            response
+        "messages": [           
+            response,
+            ToolMessage(
+                name=response.tool_calls[0]["name"],
+                content="summarized.",
+                tool_call_id=response.tool_calls[0]["id"]
+            )
         ],
-        "tasks": None
+        "answer": response.tool_calls[0]["args"],
     }

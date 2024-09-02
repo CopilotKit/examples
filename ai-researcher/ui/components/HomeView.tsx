@@ -18,19 +18,19 @@ export function HomeView() {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const { appendMessage } = useCopilotChat();
 
-  const handleResearch = () => {
-    setResearchQuery(researchInput);
+  const handleResearch = (query: string) => {
+    setResearchQuery(query);
     appendMessage(new TextMessage({
-      content: `Here is the user's query: "${researchInput}"`,
+      content: query,
       role: Role.User,
     }));
   };
 
   const suggestions = [
-    { label: "Electric cars sold in 2024", icon: "🚙" },
+    { label: "Electric cars sold in 2024 vs 2023", icon: "🚙" },
     { label: "Top 10 richest people in the world", icon: "💰" },
     { label: "Population of the World", icon: "🌍 " },
-    { label: "Best stocks in 2024", icon: "📈" },
+    { label: "Weather in Seattle VS New York", icon: "⛅️" },
   ];
 
   return (
@@ -41,7 +41,7 @@ export function HomeView() {
       transition={{ duration: 0.4 }}
       className="h-full w-full flex flex-col gap-y-2 justify-center items-center"
     >
-      <h1 className="text-4xl font-extralight mb-6">Where knowledge begins</h1>
+      <h1 className="text-4xl font-extralight mb-6">What would you like to know?</h1>
 
       <div
         className={cn(
@@ -61,7 +61,7 @@ export function HomeView() {
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
-              handleResearch();
+              handleResearch(researchInput);
             }
           }}
           maxLength={MAX_INPUT_LENGTH}
@@ -81,7 +81,7 @@ export function HomeView() {
               "opacity-0 pointer-events-none": !researchInput,
               "opacity-100": researchInput,
             })}
-            onClick={handleResearch}
+            onClick={() => handleResearch(researchInput)}
           >
             Research
             <CornerDownLeftIcon className="w-4 h-4 ml-2" />
@@ -92,7 +92,7 @@ export function HomeView() {
         {suggestions.map((suggestion) => (
           <div
             key={suggestion.label}
-            onClick={() => setResearchQuery(suggestion.label)}
+            onClick={() => handleResearch(suggestion.label)}
             className="p-2 bg-slate-100/50 rounded-md border flex cursor-pointer items-center space-x-2 hover:bg-slate-100 transition-all duration-300"
           >
             <span className="text-base">{suggestion.icon}</span>
