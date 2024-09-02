@@ -6,19 +6,23 @@ It defines the state of the agent and the state of the conversation.
 from typing import List, TypedDict, Optional
 from langgraph.graph import MessagesState
 
-class Task(TypedDict):
+class Step(TypedDict):
     """
-    Represents a task in the agent's state.
+    Represents a step taken in the research process.
     """
     id: str
     description: str
     status: str
     type: str
+    description: str
+    search_result: Optional[str]
     result: Optional[str]
+    updates: Optional[str]
 
 class AgentState(MessagesState):
     """
     This is the state of the agent.
     It is a subclass of the MessagesState class from langgraph.
     """
-    tasks: List[Task]
+    steps: List[Step]
+    answer: Optional[str]

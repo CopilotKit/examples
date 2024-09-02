@@ -12,96 +12,94 @@ from ai_researcher.state import AgentState
 
 # pylint: disable=line-too-long
 
-async def chatbot_node(state: AgentState, config: RunnableConfig):
+async def steps_node(state: AgentState, config: RunnableConfig):
     """
-    The chatbot is responsible for answering the user's questions and building the query.
+    The steps node is responsible for building the steps in the research process.
     """
 
     config = configure_copilotkit(
         config,
         emit_messages=True,
         emit_state={
-            "tasks": {
+            "steps": {
                 "tool": "search",
-                "argument": "tasks"
+                "argument": "steps"
             },
         }
     )
 
     system_message = """
-You are a search assistant. Your task is to help the user with complex search queries by breaking the down into smaller tasks.
+You are a search assistant. Your task is to help the user with complex search queries by breaking the down into smaller steps.
 
-These subtasks are then executed serially. In the end, a final answer is produced in markdown format.
-
-
+These steps are then executed serially. In the end, a final answer is produced in markdown format.
 """
 
     # use the openai tool format to get access to enums
     search_tool = {
         'name': 'search',
         'description': """
-Break the user's query into smaller tasks.
+Break the user's query into smaller steps.
 
-Use task type "search" to search the web for information.
+Use step type "search" to search the web for information.
 
-Make sure to add all the tasks needed to answer the user's query.
+Make sure to add all the steps needed to answer the user's query.
 """,
         'parameters': {
             'type': 'object',
             'properties': {
-                'tasks': {
-                    'description': """The tasks to be executed.""",
+                'steps': {
+                    'description': """The steps to be executed.""",
                     'type': 'array',
                     'items': {
                         'type': 'object',
                         'properties': {
                             'id': {
-                                'description': 'The id of the task. This is used to identify the task in the state. Just make sure it is unique.',
+                                'description': 'The id of the step. This is used to identify the step in the state. Just make sure it is unique.',
                                 'type': 'string'
                             },
                             'description': {
-                                'description': 'The description of the task, i.e. "search for information about the latest AI news"',
+                                'description': 'The description of the step, i.e. "search for information about the latest AI news"',
                                 'type': 'string'
                             },
                             'status': {
-                                'description': 'The status of the task. Always "pending".',
+                                'description': 'The status of the step. Always "pending".',
                                 'type': 'string',
                                 'enum': ['pending']
                             },
                             'type': {
-                                'description': 'The type of task.',
+                                'description': 'The type of step.',
                                 'type': 'string',
                                 'enum': ['search']
                             }
                         },
-                        'required': ['description', 'status', 'type']
+                        'required': ['id', 'description', 'status', 'type']
                     }
                 }
             },
-            'required': ['tasks']
+            'required': ['steps']
         }
     }
 
-    response = await ChatOpenAI(model="gpt-4o").bind_tools([search_tool], parallel_tool_calls=False).ainvoke([
+    response = await ChatOpenAI(model="gpt-4o").bind_tools([search_tool], parallel_tool_calls=False, tool_choice="search").ainvoke([
         *state["messages"],
         SystemMessage(
             content=system_message
         )
     ], config)
 
-    if not response.tool_calls:
-        return {
-            "messages": response,
-        }
-    
+    steps = response.tool_calls[0]["args"]["steps"]
+
+    if len(steps):
+        steps[0]["updates"] = "Searching the web..."
+
     return {
         "messages": [
             response,
             ToolMessage(
                 name=response.tool_calls[0]["name"],
-                content="executing tasks...",
+                content="executing steps...",
                 tool_call_id=response.tool_calls[0]["id"]
             )
         ],
-        "tasks": response.tool_calls[0]["args"]["tasks"],
+        "steps": steps,
     }
