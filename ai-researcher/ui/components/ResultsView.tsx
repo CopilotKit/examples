@@ -11,6 +11,7 @@ import {
 import { SkeletonLoader } from "./SkeletonLoader";
 import { Button } from "./ui/button";
 import { useCoagent } from "@copilotkit/react-core";
+import { Progress } from "./Progress";
 
 export function ResultsView() {
   const { researchQuery, setResearchQuery, isLoading, researchResult } =
@@ -18,6 +19,8 @@ export function ResultsView() {
   const { state: researcherState, setState: setResearcherState } = useCoagent({ name: "search_agent", });
   
   console.log("state", researcherState);
+
+  // console.log("state udpates", researcherState?.steps?.[0]);
 
   return (
     <motion.div
@@ -39,6 +42,8 @@ export function ResultsView() {
           <h1 className="text-4xl font-extralight mb-3">{researchQuery}</h1>
         </div>
 
+        <Progress />
+
         <div className="flex gap-x-8">
           <div className="flex-1 flex flex-col gap-y-4">
             <h2 className="flex items-center gap-x-2">
@@ -55,7 +60,7 @@ export function ResultsView() {
           </div>
 
           {researchResult?.sources.length && (
-            <div className="flex flex-col gap-y-4">
+            <div className="flex flex-col gap-y-4 w-[200px]">
               <h2 className="flex items-center gap-x-2">
                 <BookOpenIcon className="w-4 h-4 text-slate-500" />
                 Sources

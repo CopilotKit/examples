@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 import { CornerDownLeftIcon } from "lucide-react";
 import { useResearchContext } from "@/lib/research-provider";
 import { motion } from "framer-motion";
-import { useCoagent, useCopilotChat } from "@copilotkit/react-core";
+import { useCopilotChat } from "@copilotkit/react-core";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 
 const MAX_INPUT_LENGTH = 250;
@@ -26,9 +26,6 @@ export function HomeView() {
     }));
   };
 
-  const { state: researcherState, setState: setResearcherState } = useCoagent({ name: "search_agent", });
-
-  console.log("state[home]", researcherState);
   const suggestions = [
     { label: "Electric cars sold in 2024", icon: "🚙" },
     { label: "Top 10 richest people in the world", icon: "💰" },
