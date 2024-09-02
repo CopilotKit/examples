@@ -6,6 +6,7 @@ It defines the workflow graph and the entry point for the agent.
 import json
 
 from langgraph.graph import StateGraph, END
+from langgraph.checkpoint.memory import MemorySaver
 
 from ai_researcher.state import AgentState
 from ai_researcher.chatbot import chatbot_node
@@ -49,4 +50,5 @@ workflow.add_conditional_edges(
 
 workflow.add_edge("summarize_node", END)
 
-graph = workflow.compile()
+memory = MemorySaver()
+graph = workflow.compile(checkpointer=memory)
