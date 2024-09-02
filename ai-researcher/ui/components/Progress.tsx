@@ -1,12 +1,5 @@
 import { cn } from "@/lib/utils";
 import { CheckIcon, LoaderCircle } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { useCoagent } from "@copilotkit/react-core";
 
 export function Progress({
   steps,
@@ -40,25 +33,11 @@ export function Progress({
                 ></div>
               )}
             </div>
-            <div className="flex-1 flex justify-center">
-              <Accordion type="single" collapsible className="w-full pr-2 py-0">
-                <AccordionItem value="item-1">
-                  <AccordionTrigger
-                    hideChevron={step.updates.length === 0}
-                    className="capitalize-first"
-                  >
-                    {step.description}
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-2">
-                    {step.updates &&
-                      step.updates.map((update, index) => (
-                        <div key={index} className="text-slate-500 text-xs">
-                          {update}
-                        </div>
-                      ))}
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+            <div className="flex-1 flex justify-center py-2 pl-2 pr-4">
+              <div className="flex-1 flex items-center">{step.description}</div>
+              <div className="text-slate-400">
+                {step.updates?.length > 0 && step.updates[step.updates.length - 1]}
+              </div>
             </div>
           </div>
         ))}
