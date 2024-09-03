@@ -17,7 +17,7 @@ class Step(TypedDict):
     description: str
     search_result: Optional[str]
     result: Optional[str]
-    updates: Optional[any]
+    updates: Optional[List[str]]
 
 class AgentState(MessagesState):
     """
