@@ -1,5 +1,8 @@
 """Demo"""
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI
 import uvicorn
 from copilotkit.integrations.fastapi import add_fastapi_endpoint
