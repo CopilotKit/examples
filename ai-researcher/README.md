@@ -1,19 +1,24 @@
 # AI Researcher Example
 
+**These instructions assume you are in the `ai-researcher/` directory**
+
 ## Running the Agent
 
 First, install the dependencies:
 
 ```sh
-cd ai-researcher/agent
+cd agent
 poetry install
 ```
 
-Then, create a `.env.local` file inside `ai-researcher/agent` with the following:
+Then, create a `.env` file inside `./agent` with the following:
 ```
 OPENAI_API_KEY=...
 TAVILY_API_KEY=...
 ```
+
+IMPORTANT:
+Make sure the OpenAI API Key you provide, supports gpt-4o.
 
 Then, run the demo:
 
@@ -26,11 +31,11 @@ poetry run demo
 First, install the dependencies:
 
 ```sh
-cd ai-researcher/ui
+cd ./ui
 pnpm i
 ```
 
-Then, create a `.env.local` file inside `ai-researcher/ui` with the following:
+Then, create a `.env` file inside `./ui` with the following:
 ```
 OPENAI_API_KEY=...
 ```
@@ -48,6 +53,6 @@ Navigate to [http://localhost:3000](http://localhost:3000).
 
 # LangGraph Studio
 
-Run LangGraph studio, then load the `ai-researcher/agent` folder into it.
+Run LangGraph studio, then load the `./agent` folder into it.
 
 Make sure to create teh `.env` mentioned above first!
