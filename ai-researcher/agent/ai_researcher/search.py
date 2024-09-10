@@ -56,32 +56,6 @@ This is what you need to search for, please come up with a good search query: {c
 
     tool_msg = tavily_tool.invoke(response.tool_calls[0])
 
-
-#     system_message = f"""
-# This task was just executed: {json.dumps(current_step)}
-
-# This is the result of the search: 
-
-# {tool_msg}
-
-# Please summarize the ONLY the result of the search and include all relevant information from the search and reference links.
-
-# DO NOT INCLUDE ANY EXTRA INFORMATION. ALL OF THE INFORMATION YOU ARE LOOKING FOR IS IN THE SEARCH RESULTS.
-
-# DO NOT answer the user's query yet. Just summarize the search results.
-
-# Use markdown formatting and put the references inline and the links at the end.
-# Like this:
-# This is a sentence with a reference to a source [source 1][1] and another reference [source 2][2].
-# [1]: http://example.com/source1 "Title of Source 1"
-# [2]: http://example.com/source2 "Title of Source 2"
-# """
-
-#     response = await ChatOpenAI(model="gpt-4o").ainvoke([
-#         *state["messages"],
-#         SystemMessage(content=system_message)
-#     ], config)
-
     current_step["search_result"] = json.loads(tool_msg.content)
     current_step["updates"] = [*current_step["updates"],"Extracting information..."]
 
