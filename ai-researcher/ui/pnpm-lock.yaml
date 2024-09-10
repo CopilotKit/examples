@@ -9,17 +9,17 @@ importers:
   .:
     dependencies:
       '@copilotkit/react-core':
-        specifier: 1.1.1-feat-runtime-remote-actions.5
-        version: 1.1.1-feat-runtime-remote-actions.5(ignore@5.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 1.1.3-feat-runtime-remote-actions.1
+        version: 1.1.3-feat-runtime-remote-actions.1(ignore@5.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@copilotkit/react-ui':
-        specifier: 1.1.1-feat-runtime-remote-actions.5
-        version: 1.1.1-feat-runtime-remote-actions.5(@types/react@18.3.4)(ignore@5.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 1.1.3-feat-runtime-remote-actions.1
+        version: 1.1.3-feat-runtime-remote-actions.1(@types/react@18.3.4)(ignore@5.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@copilotkit/runtime':
-        specifier: 1.1.1-feat-runtime-remote-actions.5
-        version: 1.1.1-feat-runtime-remote-actions.5(class-validator@0.14.1)(ignore@5.3.2)
+        specifier: 1.1.3-feat-runtime-remote-actions.1
+        version: 1.1.3-feat-runtime-remote-actions.1(class-validator@0.14.1)(ignore@5.3.2)
       '@copilotkit/runtime-client-gql':
-        specifier: 1.1.1-feat-runtime-remote-actions.5
-        version: 1.1.1-feat-runtime-remote-actions.5(ignore@5.3.2)(react@18.3.1)
+        specifier: 1.1.3-feat-runtime-remote-actions.1
+        version: 1.1.3-feat-runtime-remote-actions.1(ignore@5.3.2)(react@18.3.1)
       '@radix-ui/react-accordion':
         specifier: ^1.2.0
         version: 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -106,27 +106,27 @@ packages:
     resolution: {integrity: sha512-VBj9MYyDb9tuLq7yzqjgzt6Q+IBQLrGZfdjOekyEirZPHxXWoTSGUTMrpsfi58Up73d13NfYLv8HT9vmznjzhQ==}
     engines: {node: '>=6.9.0'}
 
-  '@copilotkit/react-core@1.1.1-feat-runtime-remote-actions.5':
-    resolution: {integrity: sha512-FYseb9cxM6P3b+0Qdfj4EF7T0PJZKINnTG69gad9S0YZ+nP+WnNGBsaFYo6T2m4J6JzTwchEXZeEh4us3+RxOg==}
+  '@copilotkit/react-core@1.1.3-feat-runtime-remote-actions.1':
+    resolution: {integrity: sha512-SNXWDFuxZPG8vcjSVVe1l9PqjNh524ZSTHC1ztKzu3AsPJb4alOwpsrNBjO0xk69TNYHEWCRGAqwmTD5EOdiSQ==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
 
-  '@copilotkit/react-ui@1.1.1-feat-runtime-remote-actions.5':
-    resolution: {integrity: sha512-9uYNCvHNS9fHXk13deOugjT0E7ft7wkNrB0d2pLGajYnXbeLl85OdpykyL1aNnyCrvJJhN+GrbKLh/hdLCI+iA==}
+  '@copilotkit/react-ui@1.1.3-feat-runtime-remote-actions.1':
+    resolution: {integrity: sha512-oGkqntNw7oin43P0DKNY3w0DWBLcTtUX6UL0O2FH8jmAma3wafGtda1/y+iSMvkuMTC5NGr2klCSS7+VRKqnyw==}
     peerDependencies:
       react: ^18.2.0
 
-  '@copilotkit/runtime-client-gql@1.1.1-feat-runtime-remote-actions.5':
-    resolution: {integrity: sha512-BCFCkvAhFZHpHSBjXOYMrq0tenSoW9T6dBJT5Nav4JrVqehRoQk0RtHEiXS1fG0tF/vlWEfhgWRO57C8Ul+spw==}
+  '@copilotkit/runtime-client-gql@1.1.3-feat-runtime-remote-actions.1':
+    resolution: {integrity: sha512-HxaMSP4nC3otnXv1Lt29t8FcIGEJ8ugCd6f1Tdy3L41X637xM17BKuh8a0/JINeiA/ojlDtH3AWQlxJQ6brGTw==}
     peerDependencies:
       react: ^18.2.0
 
-  '@copilotkit/runtime@1.1.1-feat-runtime-remote-actions.5':
-    resolution: {integrity: sha512-nFzmv9Y9fFnkF03MTO8ubMzQWnrWZtSfYxWwb/1zjh1Pt/P9GnpiSKoPC2079WOp+HryzteZRKioocEcfkbyQg==}
+  '@copilotkit/runtime@1.1.3-feat-runtime-remote-actions.1':
+    resolution: {integrity: sha512-Ei5YeaOzzlIBLiKkL0H4toecGu47OIyog3e8H8Q9tPZCPxBN+Y7bj26j/BCuOVQBNmuGfjxmrF1fSPFK+l/vcg==}
 
-  '@copilotkit/shared@1.1.1-feat-runtime-remote-actions.5':
-    resolution: {integrity: sha512-D4nxl/ZwluL0NaQqTLCGTPIZfrgkounxTgtydNtMWilgLWvzqtRszGYAamj7IwXo+gP41af6vxalVHR4+eLqgQ==}
+  '@copilotkit/shared@1.1.3-feat-runtime-remote-actions.1':
+    resolution: {integrity: sha512-68fugOUF52x5jmIygP9Ai3Ri0zfJBkgSA4ZhhGnjYsY6hEyp2aDIHp5y1TQiWYi5M+QFbnwBYZVkBYNVpNrK8w==}
 
   '@envelop/core@5.0.2':
     resolution: {integrity: sha512-tVL6OrMe6UjqLosiE+EH9uxh2TQC0469GwF4tE014ugRaDDKKVWwFwZe0TBMlcyHKh5MD4ZxktWo/1hqUxIuhw==}
@@ -3622,10 +3622,10 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
-  '@copilotkit/react-core@1.1.1-feat-runtime-remote-actions.5(ignore@5.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@copilotkit/react-core@1.1.3-feat-runtime-remote-actions.1(ignore@5.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@copilotkit/runtime-client-gql': 1.1.1-feat-runtime-remote-actions.5(ignore@5.3.2)(react@18.3.1)
-      '@copilotkit/shared': 1.1.1-feat-runtime-remote-actions.5
+      '@copilotkit/runtime-client-gql': 1.1.3-feat-runtime-remote-actions.1(ignore@5.3.2)(react@18.3.1)
+      '@copilotkit/shared': 1.1.3-feat-runtime-remote-actions.1
       '@scarf/scarf': 1.3.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -3754,11 +3754,11 @@ snapshots:
       - youtube-transcript
       - youtubei.js
 
-  '@copilotkit/react-ui@1.1.1-feat-runtime-remote-actions.5(@types/react@18.3.4)(ignore@5.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@copilotkit/react-ui@1.1.3-feat-runtime-remote-actions.1(@types/react@18.3.4)(ignore@5.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@copilotkit/react-core': 1.1.1-feat-runtime-remote-actions.5(ignore@5.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@copilotkit/runtime-client-gql': 1.1.1-feat-runtime-remote-actions.5(ignore@5.3.2)(react@18.3.1)
-      '@copilotkit/shared': 1.1.1-feat-runtime-remote-actions.5
+      '@copilotkit/react-core': 1.1.3-feat-runtime-remote-actions.1(ignore@5.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@copilotkit/runtime-client-gql': 1.1.3-feat-runtime-remote-actions.1(ignore@5.3.2)(react@18.3.1)
+      '@copilotkit/shared': 1.1.3-feat-runtime-remote-actions.1
       '@headlessui/react': 2.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-markdown: 8.0.7(@types/react@18.3.4)(react@18.3.1)
@@ -3891,10 +3891,10 @@ snapshots:
       - youtube-transcript
       - youtubei.js
 
-  '@copilotkit/runtime-client-gql@1.1.1-feat-runtime-remote-actions.5(ignore@5.3.2)(react@18.3.1)':
+  '@copilotkit/runtime-client-gql@1.1.3-feat-runtime-remote-actions.1(ignore@5.3.2)(react@18.3.1)':
     dependencies:
-      '@copilotkit/runtime': 1.1.1-feat-runtime-remote-actions.5(class-validator@0.14.1)(ignore@5.3.2)
-      '@copilotkit/shared': 1.1.1-feat-runtime-remote-actions.5
+      '@copilotkit/runtime': 1.1.3-feat-runtime-remote-actions.1(class-validator@0.14.1)(ignore@5.3.2)
+      '@copilotkit/shared': 1.1.3-feat-runtime-remote-actions.1
       '@urql/core': 5.0.6(graphql@16.9.0)
       class-transformer: 0.5.1
       class-validator: 0.14.1
@@ -4027,9 +4027,9 @@ snapshots:
       - youtube-transcript
       - youtubei.js
 
-  '@copilotkit/runtime@1.1.1-feat-runtime-remote-actions.5(class-validator@0.14.1)(ignore@5.3.2)':
+  '@copilotkit/runtime@1.1.3-feat-runtime-remote-actions.1(class-validator@0.14.1)(ignore@5.3.2)':
     dependencies:
-      '@copilotkit/shared': 1.1.1-feat-runtime-remote-actions.5
+      '@copilotkit/shared': 1.1.3-feat-runtime-remote-actions.1
       '@google/generative-ai': 0.11.5
       '@graphql-yoga/plugin-defer-stream': 3.7.0(graphql-yoga@5.7.0(graphql@16.9.0))(graphql@16.9.0)
       '@langchain/community': 0.0.53(langchain@0.1.37(ignore@5.3.2)(openai@4.57.0(zod@3.23.8)))(openai@4.57.0(zod@3.23.8))
@@ -4174,10 +4174,11 @@ snapshots:
       - youtube-transcript
       - youtubei.js
 
-  '@copilotkit/shared@1.1.1-feat-runtime-remote-actions.5':
+  '@copilotkit/shared@1.1.3-feat-runtime-remote-actions.1':
     dependencies:
       '@segment/analytics-node': 2.1.2
       chalk: 4.1.2
+      uuid: 10.0.0
     transitivePeerDependencies:
       - encoding
 

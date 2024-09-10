@@ -10,13 +10,13 @@ import {
 } from "lucide-react";
 import { SkeletonLoader } from "./SkeletonLoader";
 import { Button } from "./ui/button";
-import { useCoagent } from "@copilotkit/react-core";
+import { useCoAgent } from "@copilotkit/react-core";
 import { Progress } from "./Progress";
 import { AnswerMarkdown } from "./AnswerMarkdown";
 
 export function ResultsView() {
   const { researchQuery, setResearchQuery } = useResearchContext();
-  const { state: agentState, setState: setAgentState } = useCoagent({
+  const { state: agentState, setState: setAgentState } = useCoAgent({
     name: "search_agent",
   });
 
