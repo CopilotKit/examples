@@ -22,7 +22,7 @@ async def summarize_node(state: AgentState, config: RunnableConfig):
                 "state_key": "answer",
                 "tool": "summarize",
             }
-        ]       
+        ]
     )
 
     system_message = f"""
