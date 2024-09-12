@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <main className="flex h-screen flex-col items-center justify-between">
       <CopilotKit
-        agent="search_agent"
         runtimeUrl="/api/copilotkit"
+        agent="search_agent"
       >
         <ResearchProvider>
           <ResearchWrapper />

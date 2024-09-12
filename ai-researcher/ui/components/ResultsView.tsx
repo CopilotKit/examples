@@ -9,16 +9,17 @@ import {
   SparkleIcon,
 } from "lucide-react";
 import { SkeletonLoader } from "./SkeletonLoader";
-import { Button } from "./ui/button";
 import { useCoAgent } from "@copilotkit/react-core";
 import { Progress } from "./Progress";
 import { AnswerMarkdown } from "./AnswerMarkdown";
 
 export function ResultsView() {
-  const { researchQuery, setResearchQuery } = useResearchContext();
-  const { state: agentState, setState: setAgentState } = useCoAgent({
+  const { researchQuery } = useResearchContext();
+  const { state: agentState } = useCoAgent({
     name: "search_agent",
   });
+
+  console.log("AGENT_STATE", agentState);
 
   const steps =
     agentState?.steps?.map((step: any) => {
@@ -40,14 +41,6 @@ export function ResultsView() {
     >
       <div className="w-[1000px] p-12 flex flex-col gap-y-8">
         <div className="space-y-4 mt-20">
-          {/* <Button
-            variant="link"
-            onClick={() => setResearchQuery("")}
-            className="flex p-0 items-center justify-center gap-x-1  text-slate-500 text-sm"
-          >
-            <ArrowLeftIcon className="w-4 h-4" />
-            Back
-          </Button> */}
           <h1 className="text-4xl font-extralight">{researchQuery}</h1>
         </div>
 
