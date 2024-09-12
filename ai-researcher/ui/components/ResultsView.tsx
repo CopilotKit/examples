@@ -3,7 +3,6 @@
 import { useResearchContext } from "@/lib/research-provider";
 import { motion } from "framer-motion";
 import {
-  ArrowLeftIcon,
   BookOpenIcon,
   LoaderCircleIcon,
   SparkleIcon,
