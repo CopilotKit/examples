@@ -42,5 +42,15 @@
       ],
       "labels": ["dependencies"]
     }
+    {
+      "description": "[AI Researcher Agent] Enable Renovate for CopilotKit packages only",
+      "enabled": true,
+      "matchPaths": ["ai-researcher/agent/**"],
+      "matchPackageNames": [
+        "/^copilotkit/"
+      ],
+      "labels": ["copilotkit"],
+      "groupName": "AI Researcher CopilotKit dependencies"
+    }
   ]
 }
