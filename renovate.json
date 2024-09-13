@@ -7,7 +7,7 @@
   "poetry": {
     "enabled": true
   },
-  "pep": {
+  "pep621": {
     "enabled": false
   },
   "npm": {
