@@ -1,0 +1,28 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "dependencyDashboard": true,
+  "extends": [
+    "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "description": "[AI Researcher] Ignore all NPM packages initially",
+      "enabled": false,
+      "matchPaths": ["ai-researcher/ui/**"],
+      "matchPackageNames": [
+        "*"
+      ],
+      "labels": ["dependencies"]
+    },
+    {
+      "description": "[AI Researcher] Enable Renovate for CopilotKit packages only",
+      "enabled": true,
+      "matchPaths": ["ai-researcher/ui/**"],
+      "matchPackageNames": [
+        "/^@copilotkit/"
+      ],
+      "labels": ["copilotkit"],
+      "groupName": "AI Researcher CopilotKit dependencies"
+    }
+  ]
+}
