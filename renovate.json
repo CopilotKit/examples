@@ -41,7 +41,7 @@
         "*"
       ],
       "labels": ["dependencies"]
-    }
+    },
     {
       "description": "[AI Researcher Agent] Enable Renovate for CopilotKit packages only",
       "enabled": true,
