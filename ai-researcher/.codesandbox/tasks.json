@@ -1,0 +1,26 @@
+{
+  "setupTasks": [
+    {
+      "name": "Install Poetry",
+      "command": "pipx install poetry"
+    },
+    {
+      "name": "Install (Agent)",
+      "command": "cd agent && poetry install"
+    },
+    {
+      "name": "Install (UI)",
+      "command": "cd ui && pnpm install"
+    }
+  ],
+  "tasks": {
+    "dev": {
+      "name": "dev",
+      "command": "cd ui && pnpx next dev",
+      "runAtStart": true,
+      "preview": {
+        "port": 3000
+      }
+    }
+  }
+}
