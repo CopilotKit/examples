@@ -1,5 +1,5 @@
 {
-  "name": "Dev Container - AI Researcher",
+  "name": "Dev Container",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
   "features": {
     "ghcr.io/devcontainers-community/npm-features/typescript:1": {},
