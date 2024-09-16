@@ -39,13 +39,13 @@ export function HomeView() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
-      className="h-full w-full flex flex-col gap-y-2 justify-center items-center"
+      className="h-screen w-full flex flex-col gap-y-2 justify-center items-center p-4 lg:p-0"
     >
       <h1 className="text-4xl font-extralight mb-6">What would you like to know?</h1>
 
       <div
         className={cn(
-          "w-[600px] bg-slate-100/50 border shadow-sm rounded-md transition-all",
+          "w-full bg-slate-100/50 border shadow-sm rounded-md transition-all",
           {
             "ring-1 ring-slate-300": isInputFocused,
           }
@@ -93,7 +93,7 @@ export function HomeView() {
           <div
             key={suggestion.label}
             onClick={() => handleResearch(suggestion.label)}
-            className="p-2 bg-slate-100/50 rounded-md border flex cursor-pointer items-center space-x-2 hover:bg-slate-100 transition-all duration-300"
+            className="p-2 bg-slate-100/50 rounded-md border col-span-2 lg:col-span-1 flex cursor-pointer items-center space-x-2 hover:bg-slate-100 transition-all duration-300"
           >
             <span className="text-base">{suggestion.icon}</span>
             <span className="flex-1">{suggestion.label}</span>

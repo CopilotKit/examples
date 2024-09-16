@@ -71,19 +71,19 @@
     @apply text-slate-900 space-y-2;
 
     h1 {
-      @apply text-2xl mb-2 mt-4 font-medium;
+      @apply text-xl lg:text-2xl mb-2 mt-4 font-medium;
     }
 
     h2 {
-      @apply text-xl mb-2 mt-4 font-medium;
+      @apply text-xl lg:text-2xl mb-2 mt-4 font-medium;
     }
 
     h3 {
-      @apply text-xl mb-2 mt-4 font-medium;
+      @apply text-xl lg:text-2xl mb-2 mt-4 font-medium;
     }
 
     h4 {
-      @apply text-lg mb-2 mt-4 font-medium;
+      @apply text-lg lg:text-xl mb-2 mt-4 font-medium;
     }
 
     a {

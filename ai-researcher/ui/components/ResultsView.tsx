@@ -38,15 +38,15 @@ export function ResultsView() {
       exit={{ opacity: 0, y: -50 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="w-[1000px] p-12 flex flex-col gap-y-8">
-        <div className="space-y-4 mt-20">
-          <h1 className="text-4xl font-extralight">{researchQuery}</h1>
+      <div className="max-w-[1000px] p-8 lg:p-4 flex flex-col gap-y-8 mt-4 lg:mt-6 text-sm lg:text-base">
+        <div className="space-y-4">
+          <h1 className="text-3xl lg:text-4xl font-extralight">{researchQuery}</h1>
         </div>
 
         <Progress steps={steps} />
 
-        <div className="flex gap-x-8">
-          <div className="flex-1 flex flex-col gap-y-4">
+        <div className="grid grid-cols-12 gap-8">
+          <div className="col-span-12 lg:col-span-8 flex flex-col">
             <h2 className="flex items-center gap-x-2">
               {isLoading ? (
                 <LoaderCircleIcon className="animate-spin w-4 h-4 text-slate-500" />
@@ -65,7 +65,7 @@ export function ResultsView() {
           </div>
 
           {agentState?.answer?.references?.length && (
-            <div className="flex flex-col gap-y-4 w-[200px]">
+            <div className="flex col-span-12 lg:col-span-4 flex-col gap-y-4 w-[200px]">
               <h2 className="flex items-center gap-x-2">
                 <BookOpenIcon className="w-4 h-4 text-slate-500" />
                 References
