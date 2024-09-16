@@ -1,3 +1,4 @@
 {
-  "name": "Dev Container - AI Researcher"
+  "name": "Dev Container - AI Researcher",
+  "image": "mcr.microsoft.com/devcontainers/universal:latest"
 }
