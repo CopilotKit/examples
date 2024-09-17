@@ -12,6 +12,7 @@
     "copilotkit",
     "fastapi",
     "uvicorn",
-    "checkpointer"
+    "checkpointer",
+    "dotenv"
   ]
 }
