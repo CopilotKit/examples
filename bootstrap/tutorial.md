@@ -1,144 +1,103 @@
-Set up a new Next.js app with Coagents.
+# [WIP] CoAgents onboarding
 
-1. Create a new Next.js app
+<aside>
+👉
+
+Working through some Git permissions issues to push code, copying tutorial outline here for commenting and visibility
+
+</aside>
+
+# Overview
+
+We’ll walk through the steps to add a bare-bones AI agent—based on CopilotKit and LangGraph—to a Next.js application. While this example starts with a brand-new app, you should be able to easily adapt this walkthrough to add agent support to any existing React app.
+
+For these examples, we’ll set up a self-hosted CopilotKit API endpoint as a Next.js API route and use a tiny Python-based FastAPI service to interface between our app, LangGraph, and our AI provider of choice (OpenAI, in this case).
+
+# Tutorial steps
+
+## Create a new Next.js app
 
 ```bash
 npx create-next-app@latest coagents-starter
 cd coagents-starter
 ```
 
-1. Add your OpenAI API key to your `.env` file
+## Set up `.env` file
+
+Add your OpenAI API key to your `.env` file:
 
 ```bash
 OPENAI_API_KEY="<your key>"
 ```
 
-2. Set up a Python virtual environment
+## Set up a Python virtual environment (optional, but recommended)
+
+In the Python ecosystem, packages are installed globally by default, but you can optionally set up [_virtual environments_](https://docs.python.org/3/tutorial/venv.html) that behave similarly to `node_modules`, in that all your project dependencies will be downloaded and sandboxed for just this project.
 
 ```bash
+# Creates a new directory called `.venv` for your Python runtime, packages, etc
 python -m venv .venv
+
+# Enables this virtual env in your shell
 source .venv/bin/activate
 ```
 
-You'll want to add the .venv directory to your `.gitignore` file.
+You’ll want to add the `.venv` directory (or whatever name you chose) to your `.gitignore` file.
 
 ```bash
 echo ".venv" >> .gitignore
 ```
 
-3. Install necessary Python packages
+Once your virtual env is set up, you can use its `bin` directory to access `python`, `pip`, or any command line tools installed via Python. You can even add this directory to your `PATH` to save some typing:
+
+```bash
+export PATH=./.venv/bin:$PATH
+
+# After which, this will work
+which python #=> .venv/bin/python
+```
+
+For clarity’s sake, from here on out we’ll use the `.venv/bin/*` prefixed commands, but if you followed this step you can omit the prefix.
+
+## Install necessary Python packages
 
 ```bash
 # TODO: Also OpenAI?
-python -m pip install langgraph langchain copilotkit
+.venv/bin/pip install langgraph langchain copilotkit \
+  "fastapi[standard]" python-dotenv
 ```
 
-4. Make a `requirements.txt` file
+If you’re new to Python and `pip`, be aware that `pip` does _not_ automatically save new dependencies. You’ll need to dump a list of your agent’s dependencies to a `requirements.txt` file, which you can check into source control:
 
 ```bash
-python -m pip freeze > requirements.txt
+.venv/bin/pip freeze > requirements.txt
 ```
 
-5. Create a new subdirectory for your agent's Python code
+## Set up your agent directory and source files
+
+We’ll be setting up our LangGraph agent in a subdirectory called `agent`.
 
 ```bash
 mkdir agent
-```
-
-6. Inside the `agent` directory, create these files:
-
-```bash
 touch agent/__init__.py agent/agent.py agent/server.py
 ```
 
-We'll leave `__init__.py` empty for now.
-
-7. Add the following code to `agent.py`:
+We'll leave `__init__.py` empty for now. In the file called [`server.py`](http://server.py) we’ll start by adding a simple “Hello, World” example to confirm that our Python environment is working.
 
 ```python
-"""
-This is the main entry point for the AI.
-It defines the workflow graph and the entry point for the agent.
-"""
-# pylint: disable=line-too-long, unused-import
+from fastapi import FastAPI
 
-import json
-from typing import cast, TypedDict
-from langchain_openai import ChatOpenAI
-from langchain_core.messages import SystemMessage, ToolMessage, AIMessage, HumanMessage
-from langchain_core.runnables import RunnableConfig
-from langgraph.graph import StateGraph, END
-from langgraph.checkpoint.memory import MemorySaver
-from langgraph.graph import MessagesState
+app = FastAPI()
 
-class Translations(TypedDict):
-    """Contains the translations in four different languages."""
-    translation_es: str
-    translation_fr: str
-    translation_de: str
-
-class AgentState(MessagesState):
-    """Contains the state of the agent."""
-    translations: Translations
-    input: str
-
-async def translate_node(state: AgentState, config: RunnableConfig):
-    """Chatbot that translates text"""
-    model = ChatOpenAI(model="gpt-4o").bind_tools(
-        [Translations],
-        parallel_tool_calls=False,
-        tool_choice=(
-            None if state["messages"] and
-            isinstance(state["messages"][-1], HumanMessage)
-            else "Translations"
-        )
-    )
-
-    response = await model.ainvoke([
-        SystemMessage(
-            content=f"""
-            You are a helpful assistant that translates text to different languages
-            (Spanish, French and German).
-            Don't ask for confirmation before translating.
-            {
-                'The user is currently working on translating this text: "' +
-                state["input"] + '"' if state.get("input") else ""
-            }
-            """
-        ),
-        *state["messages"],
-    ], config)
-
-    if hasattr(response, "tool_calls") and len(getattr(response, "tool_calls")) > 0:
-        ai_message = cast(AIMessage, response)
-        return {
-            "messages": [
-                response,
-                ToolMessage(
-                    content="Translated!",
-                    tool_call_id=ai_message.tool_calls[0]["id"]
-                )
-            ],
-            "translations": cast(AIMessage, response).tool_calls[0]["args"],
-        }
-
-    return {
-        "messages": [
-            response,
-        ],
-    }
-
-workflow = StateGraph(AgentState)
-workflow.add_node("translate_node", translate_node)
-workflow.set_entry_point("translate_node")
-workflow.add_edge("translate_node", END)
-memory = MemorySaver()
-graph = workflow.compile(checkpointer=memory)
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
 ```
 
-8. Add the following code to `server.py`:
+Next, run the `fastapi` command which will start an API server:
 
-```python
-"""
-
+```bash
+.venv/bin/fastapi dev agent/server.py
 ```
+
+You should then be able to access [`localhost:8000`](http://localhost:8000) which will return the Hello World message as JSON.
