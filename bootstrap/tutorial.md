@@ -101,3 +101,7 @@ Next, run the `fastapi` command which will start an API server:
 ```
 
 You should then be able to access [`localhost:8000`](http://localhost:8000) which will return the Hello World message as JSON.
+
+## Create an agent
+
+There's a lot that can go into just "creating an agent" with [LangGraph](https://langchain-ai.github.io/langgraph/) that's hard to walk through and summarize here. To keep things simple, we'll follow an example adapted from [LangChain's API docs](https://langchain-ai.github.io/langgraph/#example), with a couple changes so it will work with our CopilotKit frontend.
