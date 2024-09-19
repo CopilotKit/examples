@@ -11,10 +11,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@copilotkit/react-core": "^1.2.1",
-    "@copilotkit/react-ui": "^1.2.1",
-    "@copilotkit/runtime": "^1.2.1",
-    "@copilotkit/runtime-client-gql": "^1.2.1",
+    "@copilotkit/react-core": "1.2.2-feat-runtime-remote-actions.1",
+    "@copilotkit/react-ui": "1.2.2-feat-runtime-remote-actions.1",
+    "@copilotkit/runtime": "1.2.2-feat-runtime-remote-actions.1",
+    "@copilotkit/runtime-client-gql": "1.2.2-feat-runtime-remote-actions.1",
     "next": "14.2.12",
     "react": "^18",
     "react-dom": "^18"
