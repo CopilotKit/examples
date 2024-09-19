@@ -11,14 +11,14 @@ async def root():
 # Import CopilotKit SDK and integrations
 from copilotkit.integrations.fastapi import add_fastapi_endpoint
 from copilotkit import CopilotKitSDK, LangGraphAgent
-from agent import graph
+from agent import agent_app
 
 sdk = CopilotKitSDK(
     agents=[
         LangGraphAgent(
             name="translate_agent",
             description="Agent that asks about the weather",
-            agent=graph,
+            agent=agent_app,
         )
     ],
 )

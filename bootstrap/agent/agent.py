@@ -76,7 +76,7 @@ checkpointer = MemorySaver()
 # This compiles it into a LangChain Runnable,
 # meaning you can use it as you would any other runnable.
 # Note that we're (optionally) passing the memory when compiling the graph
-app = workflow.compile(checkpointer=checkpointer)
+agent_app = workflow.compile(checkpointer=checkpointer)
 
 # Use the Runnable
 final_state = app.invoke(

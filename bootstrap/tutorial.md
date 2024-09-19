@@ -117,27 +117,60 @@ from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph, MessagesState
 from langgraph.prebuilt import ToolNode
 
+# First, we'll initialize a new stateful agent workflow
+workflow = StateGraph(MessagesState)
 
-# Define the tools for the agent to use
+# Next, we'll define some tools for the agent to use
+# This function "searches the web" to get a current weather
+# forecast. It's a placeholder, but you can probably imagine how
+# it could be updated to call a real API or database.
+#
+# The `@tool` decorator augments this method so that it can be
+# used by the agent
 @tool
 def search(query: str):
-    """Call to surf the web."""
-    # This is a placeholder, but don't tell the LLM that...
     if "sf" in query.lower() or "san francisco" in query.lower():
         return "It's 60 degrees and foggy."
     return "It's 90 degrees and sunny."
 
-
+# This tool node represents the "box" of available tools the
+# agent can call upon to assist the user. This one only consists
+# of our `search` mock function above, but you can easily add more.
 tools = [search]
-
 tool_node = ToolNode(tools)
 
 # We're using OpenAI's gpt-4o model, but you could easily swap in Claude 3.5 Sonnet here
 # model = ChatAnthropic(model="claude-3-5-sonnet-20240620").bind_tools(tools)
 model = ChatOpenAI(model="gpt-4o").bind_tools(tools)
 
-# Define the function that determines whether to continue or not
-def should_continue(state: MessagesState) -> Literal["tools", END]:
+# This function calls the model we initialized above, which was
+# set up with our workflow's set of tools
+def call_model(state: MessagesState):
+    messages = state['messages']
+    response = model.invoke(messages)
+    # We return a list, because this will get added to the existing list
+    return {"messages": [response]}
+
+
+# Our workflow will cycle between these two nodes — tools, which
+# fetch data or perform actions, and the agent that interacts with
+# our users
+workflow.add_node("tools", tool_node)
+workflow.add_node("agent", call_model)
+
+# Having added these nodes to the graph, now let's add some edges.
+
+# First, we set the entrypoint as `agent` — i.e., this workflow
+# should always begin with the AI agent as opposed to a tool.
+workflow.add_edge(START, "agent")
+
+# Next, we'll add 'conditional edges' which will act as a state
+# machine, defining the order in which agent actions should be
+# followed by tool calls or responses to the user.
+
+# This function checks whether the LLM needs to call a tool, or
+# else is ready to stop working and return a response.
+def continue_or_respond(state: MessagesState) -> Literal["tools", END]:
     messages = state['messages']
     last_message = messages[-1]
     # If the LLM makes a tool call, then we route to the "tools" node
@@ -146,54 +179,24 @@ def should_continue(state: MessagesState) -> Literal["tools", END]:
     # Otherwise, we stop (reply to the user)
     return END
 
-
-# Define the function that calls the model
-def call_model(state: MessagesState):
-    messages = state['messages']
-    response = model.invoke(messages)
-    # We return a list, because this will get added to the existing list
-    return {"messages": [response]}
-
-
-# Define a new graph
-workflow = StateGraph(MessagesState)
-
-# Define the two nodes we will cycle between
-workflow.add_node("agent", call_model)
-workflow.add_node("tools", tool_node)
-
-# Set the entrypoint as `agent`
-# This means that this node is the first one called
-workflow.add_edge(START, "agent")
-
-# We now add a conditional edge
+# Here, we add this edge to the workflow, connecting the agent to
+# our function that decides whether a tool call is needed.
 workflow.add_conditional_edges(
-    # First, we define the start node. We use `agent`.
-    # This means these are the edges taken after the `agent` node is called.
     "agent",
-    # Next, we pass in the function that will determine which node is called next.
-    should_continue,
+    continue_or_respond,
 )
 
-# We now add a normal edge from `tools` to `agent`.
-# This means that after `tools` is called, `agent` node is called next.
+# And here we add a normal edge from `tools` to `agent`, so that
+# agents are invoked after a tools call so they can receive and
+# process the data returned by the tool
 workflow.add_edge("tools", 'agent')
 
-# Initialize memory to persist state between graph runs
+# That's our workflow.
+
+# Finally, we compile it! Here we're initializing and including
+# a memory checkpointer that will persist state across runs
 checkpointer = MemorySaver()
-
-# Finally, we compile it!
-# This compiles it into a LangChain Runnable,
-# meaning you can use it as you would any other runnable.
-# Note that we're (optionally) passing the memory when compiling the graph
-app = workflow.compile(checkpointer=checkpointer)
-
-# Use the Runnable
-final_state = app.invoke(
-    {"messages": [HumanMessage(content="what is the weather in sf")]},
-    config={"configurable": {"thread_id": 42}}
-)
-final_state["messages"][-1].content
+agent_app = workflow.compile(checkpointer=checkpointer)
 ```
 
 This defines a simple agent that can ask for weather forecasts. In the `search` method, near the top, you'll see some placeholder code that checks whether a query contains "sf" or not and returns a hard-coded response. In your app, you can update this method to make a real search or API call, and can define additional "tools" that your agent can invoke.
@@ -206,20 +209,22 @@ Next, in `server.py`, add these lines to connect this agent graph to our web ser
 # Import CopilotKit SDK and integrations
 from copilotkit.integrations.fastapi import add_fastapi_endpoint
 from copilotkit import CopilotKitSDK, LangGraphAgent
-from agent import graph
+from agent import agent_app
 
 sdk = CopilotKitSDK(
     agents=[
         LangGraphAgent(
             name="weather_agent",
             description="Agent that asks about the weather",
-            agent=graph
+            agent=agent_app
         )
     ],
 )
 
 add_fastapi_endpoint(app, sdk, "/copilotkit")
 ```
+
+Here we're able to import the `agent_app` object that represents our graph, then pass it into `CopilotKitSDK` to use as an agent.
 
 ## Integrate the agent into your Next.js app
 
