@@ -14,23 +14,21 @@ interface TranslateAgentState {
 }
 
 export function Translator() {
-  const { state: translateAgentState, setState: setTranslateAgentState } =
-    useCoAgent<TranslateAgentState>({
-      name: "translate_agent",
-      initialState: { input: "Hello World" },
-    });
+  const {
+    state: translateAgentState,
+    setState: setTranslateAgentState,
+    run: runTranslateAgent,
+  } = useCoAgent<TranslateAgentState>({
+    name: "translate_agent",
+    initialState: { input: "Hello World" },
+  });
 
-  const { appendMessage, isLoading } = useCopilotChat();
+  const { isLoading } = useCopilotChat();
 
   console.log("state", translateAgentState);
 
   const handleTranslate = () => {
-    appendMessage(
-      new TextMessage({
-        role: MessageRole.System,
-        content: "Translate to all languages",
-      })
-    );
+    runTranslateAgent("Translate to all languages");
   };
 
   return (

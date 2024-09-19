@@ -12,7 +12,7 @@ from langchain_core.runnables import RunnableConfig
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import MessagesState
-from copilotkit.langchain import configure_copilotkit
+from copilotkit.langchain import copilotkit_customize_config
 
 class Translations(TypedDict):
     """Contains the translations in four different languages."""
@@ -28,7 +28,7 @@ class AgentState(MessagesState):
 async def translate_node(state: AgentState, config: RunnableConfig):
     """Chatbot that translates text"""
 
-    config = configure_copilotkit(
+    config = copilotkit_customize_config(
         config,
         emit_messages=True,
         emit_intermediate_state=[
