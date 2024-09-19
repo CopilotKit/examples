@@ -11,7 +11,7 @@ async def root():
 # Import CopilotKit SDK and integrations
 from copilotkit.integrations.fastapi import add_fastapi_endpoint
 from copilotkit import CopilotKitSDK, LangGraphAgent
-from agent import agent_app
+from agent.agent import agent_app
 
 sdk = CopilotKitSDK(
     agents=[

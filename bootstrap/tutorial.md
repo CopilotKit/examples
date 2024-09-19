@@ -226,7 +226,36 @@ add_fastapi_endpoint(app, sdk, "/copilotkit")
 
 Here we're able to import the `agent_app` object that represents our graph, then pass it into `CopilotKitSDK` to use as an agent.
 
+## Add a NPM script to start the Python service for development
+
+For convenience, we can modify our project's `package.json` to both include a dev script for this Python service, and to run both apps in parallel while we're working.
+
+First, install the `npm-run-all` package as a development dependency:
+
+```bash
+npm install --save-dev npm-run-all
+```
+
+Then update your `package.json`, renaming your Next.js dev script and adding a new script that runs both servers:
+
+```json
+{
+  // ...
+  "scripts": {
+    "dev:ui": "next dev",
+    "dev:agent": "./.venv/bin/fastapi dev agent/server.py",
+    "dev": "npm-run-all -p dev:ui dev:agent",
+    "build": "next build",
+    "start": "next start"
+  }
+}
+```
+
+If all is wired up correctly, you should be able to start both apps by running `npm run dev`, with the Next app on `localhost:3000` and the Python service on `localhost:8000`.
+
 ## Integrate the agent into your Next.js app
+
+Now, at last, the fun part. Here we'll tell the user-facing React app how to communicate with the agent, and build a UI around our workflow.
 
 As of September 2024, to take advantage of CoAgents you will need to self-host CopilotKit's API service, but this can easily be set up as a Next.js API route. Add a new API route file at `app/copilotkit/route.ts`, which will mount a CopilotKit service handler at `/copilotkit`:
 
@@ -267,5 +296,3 @@ export const POST = async (req: NextRequest) => {
 ```
 
 ## Building your CoAgent UI
-
-Now, at last, the fun part.
