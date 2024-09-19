@@ -5,6 +5,7 @@ import {
   copilotRuntimeNextJSAppRouterEndpoint,
 } from "@copilotkit/runtime";
 import OpenAI from "openai";
+import { RUNTIME_URL } from "@/lib/constants";
 
 const openai = new OpenAI();
 const serviceAdapter = new OpenAIAdapter({ openai });
@@ -25,7 +26,7 @@ export const POST = async (req: NextRequest) => {
   const { handleRequest } = copilotRuntimeNextJSAppRouterEndpoint({
     runtime,
     serviceAdapter,
-    endpoint: "/api/copilotkit",
+    endpoint: RUNTIME_URL,
   });
 
   return handleRequest(req);
