@@ -9,10 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@copilotkit/react-core": "1.2.2-feat-runtime-remote-actions.1",
-    "@copilotkit/react-ui": "1.2.2-feat-runtime-remote-actions.1",
-    "@copilotkit/runtime": "1.2.2-feat-runtime-remote-actions.1",
-    "@copilotkit/runtime-client-gql": "1.2.2-feat-runtime-remote-actions.1",
+    "@copilotkit/react-core": "1.2.2-mme-coagents-final.0",
+    "@copilotkit/react-ui": "1.2.2-mme-coagents-final.0",
+    "@copilotkit/runtime": "1.2.2-mme-coagents-final.0",
+    "@copilotkit/runtime-client-gql": "1.2.2-mme-coagents-final.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",

@@ -9,6 +9,7 @@ import { useResearchContext } from "@/lib/research-provider";
 import { motion } from "framer-motion";
 import { useCopilotChat } from "@copilotkit/react-core";
 import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
+import { useCoAgent } from "@copilotkit/react-core";
 
 const MAX_INPUT_LENGTH = 250;
 
@@ -16,14 +17,13 @@ export function HomeView() {
   const { setResearchQuery, researchInput, setResearchInput } =
     useResearchContext();
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const { appendMessage } = useCopilotChat();
+  const { run: runResearchAgent } = useCoAgent({
+    name: "search_agent",
+  });
 
   const handleResearch = (query: string) => {
     setResearchQuery(query);
-    appendMessage(new TextMessage({
-      content: query,
-      role: Role.User,
-    }));
+    runResearchAgent(query);
   };
 
   const suggestions = [
@@ -41,7 +41,9 @@ export function HomeView() {
       transition={{ duration: 0.4 }}
       className="h-screen w-full flex flex-col gap-y-2 justify-center items-center p-4 lg:p-0"
     >
-      <h1 className="text-4xl font-extralight mb-6">What would you like to know?</h1>
+      <h1 className="text-4xl font-extralight mb-6">
+        What would you like to know?
+      </h1>
 
       <div
         className={cn(
