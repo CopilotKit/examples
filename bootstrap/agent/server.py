@@ -19,6 +19,14 @@ sdk = CopilotKitSDK(
             name="translate_agent",
             description="Agent that asks about the weather",
             agent=agent_app,
+            # config=copilotkit_customize_config(
+            #    base_config={
+            #       # langchain config params, e.g.
+            #       "recursion_limit": 5
+            #    },
+            #    # copilotkit params:
+            #    emit_messages=True
+            # )
         )
     ],
 )
