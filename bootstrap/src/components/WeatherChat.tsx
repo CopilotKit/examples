@@ -2,25 +2,20 @@
 
 import * as React from 'react'
 import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
-import { CopilotPopup } from "@copilotkit/react-ui";
+// import { CopilotPopup } from "@copilotkit/react-ui";
 import { TextMessage, MessageRole } from "@copilotkit/runtime-client-gql";
 import { AGENT_NAME } from "@/lib/constants";
 
-
-interface AgentState {
+interface WeatherAgentState {
   input: string;
-  translations?: {
-    translation_es: string;
-    translation_fr: string;
-    translation_de: string;
-  };
+  response: string;
 }
 
-export default function AgentChat() {
+export default function WeatherAgentChat() {
   const { state: agentState, setState: setAgentState } =
-    useCoAgent<AgentState>({
+    useCoAgent<WeatherAgentState>({
       name: AGENT_NAME,
-      initialState: { input: "Hello World" },
+      initialState: { input: "Newark, NJ" },
     });
 
   const { appendMessage, isLoading } = useCopilotChat();
@@ -30,7 +25,7 @@ export default function AgentChat() {
     appendMessage(
       new TextMessage({
         role: MessageRole.System,
-        content: "Translate to all languages",
+        content: "Ask for the current weather",
       })
     );
   };
@@ -60,7 +55,6 @@ export default function AgentChat() {
       <div className='flex-1'>
         HAHAHA
       </div>
-      <CopilotPopup defaultOpen={true} />
     </div>
   )
 }

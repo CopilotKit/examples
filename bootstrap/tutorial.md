@@ -1,12 +1,5 @@
 # [WIP] CoAgents onboarding
 
-<aside>
-👉
-
-Working through some Git permissions issues to push code, copying tutorial outline here for commenting and visibility
-
-</aside>
-
 # Overview
 
 We’ll walk through the steps to add a bare-bones AI agent—based on CopilotKit and LangGraph—to a Next.js application. While this example starts with a brand-new app, you should be able to easily adapt this walkthrough to add agent support to any existing React app.
@@ -288,7 +281,7 @@ export const POST = async (req: NextRequest) => {
   const { handleRequest } = copilotRuntimeNextJSAppRouterEndpoint({
     runtime,
     serviceAdapter,
-    endpoint: "/api/copilotkit",
+    endpoint: "/copilotkit",
   });
 
   return handleRequest(req);
@@ -296,3 +289,110 @@ export const POST = async (req: NextRequest) => {
 ```
 
 ## Building your CoAgent UI
+
+To enable your users to interact with your AI agent, you'll need the `CopilotKit` React provider, as well as the `useCoAgent` and `useCopilotChat` hooks.
+
+We'll set up a sample UI inside this app's root route (`src/app/page.tsx`), but these pages/components can be moved to wherever is most appropriate for your app.
+
+First, to make it easier to keep strings like our agent name in sync across different parts of the app, create a file called `src/lib/constants.tsx` and add these lines:
+
+```ts
+export const AGENT_NAME = "starter_agent" as const;
+export const RUNTIME_URL = "/copilotkit" as const;
+```
+
+Next we'll add a component to handle our initial, basic task of asking about the weather. Create a new file called `src/components/WeatherChat.tsx`, and paste this code into it:
+
+```tsx
+"use client";
+
+import * as React from "react";
+import { useCoAgent, useCopilotChat } from "@copilotkit/react-core";
+import { TextMessage, MessageRole } from "@copilotkit/runtime-client-gql";
+import { AGENT_NAME } from "@/lib/constants";
+
+interface WeatherAgentState {
+  input: string;
+  response: string;
+}
+
+export default function WeatherAgentChat() {
+  const { state: agentState, setState: setAgentState } =
+    useCoAgent<WeatherAgentState>({
+      name: AGENT_NAME,
+      initialState: { input: "Hello World" },
+    });
+
+  const { appendMessage, isLoading } = useCopilotChat();
+  const buttonIsDisabled = !agentState.input || isLoading;
+
+  const handleMessage = () => {
+    appendMessage(
+      new TextMessage({
+        role: MessageRole.System,
+        content: "Translate to all languages",
+      })
+    );
+  };
+
+  // The form submit event should cover both hitting Enter and clicking Submit
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleMessage();
+  };
+
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const input = e.target.value;
+    setAgentState({
+      ...agentState,
+      input,
+    });
+  };
+
+  return (
+    <div className="flex flex-col w-full max-w-lg border border-neutral-200 p-8 min-h-[50vh] ">
+      <form onSubmit={handleSubmit} className="flex">
+        <input
+          type="text"
+          placeholder="Ask a question"
+          value={agentState.input}
+          onChange={handleChange}
+          className="border border-r-0 border-neutral-300 p-2 flex-1"
+        />
+        <button
+          type="submit"
+          disabled={buttonIsDisabled}
+          className="bg-neutral-600 text-white p-2 font-bold"
+        >
+          {isLoading ? "Working..." : "Submit"}
+        </button>
+      </form>
+      <div className="flex-1"></div>
+    </div>
+  );
+}
+```
+
+Now, in `src/app/page.tsx`, set up the `CopilotKit` provider and add the `WeatherChat` component to the page:
+
+```tsx
+"use client";
+
+import WeatherChat from "@/components/WeatherChat";
+import { AGENT_NAME, RUNTIME_URL } from "@/lib/constants";
+import { CopilotKit } from "@copilotkit/react-core";
+
+export default function Home() {
+  return (
+    <main>
+      <CopilotKit runtimeUrl={RUNTIME_URL} agent={AGENT_NAME}>
+        <WeatherChat />
+      </CopilotKit>
+    </main>
+  );
+}
+```
+
+Run `npm run dev` and open `localhost:3000`. You should see a simple chat field on the page.
+
+=== ADD IMAGE ===
