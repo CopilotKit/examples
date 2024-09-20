@@ -16,7 +16,7 @@ from .agent import agent_app
 sdk = CopilotKitSDK(
     agents=[
         LangGraphAgent(
-            name="translate_agent",
+            name="starter_agent",
             description="Agent that asks about the weather",
             agent=agent_app,
             # config=copilotkit_customize_config(

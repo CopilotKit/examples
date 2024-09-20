@@ -362,8 +362,7 @@ export default function WeatherAgentChat() {
         <button
           type="submit"
           disabled={buttonIsDisabled}
-          className="bg-neutral-600 text-white p-2 font-bold"
-        >
+          className="bg-neutral-600 text-white p-2 font-bold">
           {isLoading ? "Working..." : "Submit"}
         </button>
       </form>
