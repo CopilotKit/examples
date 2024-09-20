@@ -1,6 +1,4 @@
-# [WIP] CoAgents onboarding
-
-# Overview
+# Full setup walkthrough
 
 We’ll walk through the steps to add a bare-bones AI agent—based on CopilotKit and LangGraph—to a Next.js application. While this example starts with a brand-new app, you should be able to easily adapt this walkthrough to add agent support to any existing React app.
 
@@ -393,5 +391,3 @@ export default function Home() {
 ```
 
 Run `npm run dev` and open `localhost:3000`. You should see a simple chat field on the page.
-
-=== ADD IMAGE ===
