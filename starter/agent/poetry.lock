@@ -323,13 +323,13 @@ files = [
 
 [[package]]
 name = "copilotkit"
-version = "0.1.14"
+version = "0.1.15"
 description = "CopilotKit python SDK"
 optional = false
 python-versions = "<4.0,>=3.9"
 files = [
-    {file = "copilotkit-0.1.14-py3-none-any.whl", hash = "sha256:b942b317646102c7c224bbc90898a3ea5383b025d9a76d38f10dff0548392f30"},
-    {file = "copilotkit-0.1.14.tar.gz", hash = "sha256:ce39c7d9a1c90bab43fc6e6b776a12555e8c8c2b26903ce91eb735c3706f30bd"},
+    {file = "copilotkit-0.1.15-py3-none-any.whl", hash = "sha256:d7f6fb8663bd9d6a8b80565b13b658758a85121a560c9e8fbfe47ec663827065"},
+    {file = "copilotkit-0.1.15.tar.gz", hash = "sha256:51983303fe740ffb75a670090fcff4abe70d212451ace21f26305ed5e5a9d26c"},
 ]
 
 [package.dependencies]
@@ -792,8 +792,8 @@ jsonpatch = ">=1.33,<2.0"
 langsmith = ">=0.1.112,<0.2.0"
 packaging = ">=23.2,<25"
 pydantic = [
-    {version = ">=2.7.4,<3.0.0", markers = "python_full_version >= \"3.12.4\""},
     {version = ">=1,<3", markers = "python_full_version < \"3.12.4\""},
+    {version = ">=2.7.4,<3.0.0", markers = "python_full_version >= \"3.12.4\""},
 ]
 PyYAML = ">=5.3"
 tenacity = ">=8.1.0,<8.4.0 || >8.4.0,<9.0.0"
@@ -890,8 +890,8 @@ files = [
 httpx = ">=0.23.0,<1"
 orjson = ">=3.9.14,<4.0.0"
 pydantic = [
-    {version = ">=2.7.4,<3.0.0", markers = "python_full_version >= \"3.12.4\""},
     {version = ">=1,<3", markers = "python_full_version < \"3.12.4\""},
+    {version = ">=2.7.4,<3.0.0", markers = "python_full_version >= \"3.12.4\""},
 ]
 requests = ">=2,<3"
 
@@ -1271,8 +1271,8 @@ files = [
 annotated-types = ">=0.6.0"
 pydantic-core = "2.23.4"
 typing-extensions = [
-    {version = ">=4.12.2", markers = "python_version >= \"3.13\""},
     {version = ">=4.6.1", markers = "python_version < \"3.13\""},
+    {version = ">=4.12.2", markers = "python_version >= \"3.13\""},
 ]
 
 [package.extras]
@@ -1951,4 +1951,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "f5bebffe353c299edcd836c2494d5c6602e36133ef746a265ee1019f82c913cd"
+content-hash = "95cc272912dcfa037eea846e54d9d4f72459626e092d4fe534b20578796382e6"
