@@ -15,38 +15,26 @@
   },
   "packageRules": [
     {
-      "description": "[AI Researcher UI] Ignore all NPM packages initially",
+      "description": "[All] Ignore all NPM packages initially",
       "enabled": false,
-      "matchPaths": ["ai-researcher/ui/**"],
+      "matchPaths": ["**/*"],
       "matchPackageNames": [
         "*"
       ],
       "labels": ["dependencies"]
     },
     {
-      "description": "[AI Researcher UI] Enable Renovate for CopilotKit packages only",
+      "description": "Enable Renovate for CopilotKit packages only",
       "enabled": true,
-      "matchPaths": ["ai-researcher/ui/**"],
-      "matchPackageNames": [
-        "/^@copilotkit/"
+      "matchPaths": [
+        "ai-researcher/ui/**",
+        "starter/ui/**",
+        "coagents-qa/ui/**",
+        "coagents-shared-state/ui/**",
+        "coagents-streaming/ui/**"
       ],
-      "labels": ["copilotkit"],
-      "groupName": "AI Researcher CopilotKit dependencies"
-    },
-    {
-      "description": "[AI Researcher Agent] Ignore all Poetry packages initially",
-      "enabled": false,
-      "matchPaths": ["ai-researcher/agent/**"],
       "matchPackageNames": [
-        "*"
-      ],
-      "labels": ["dependencies"]
-    },
-    {
-      "description": "[AI Researcher Agent] Enable Renovate for CopilotKit packages only",
-      "enabled": true,
-      "matchPaths": ["ai-researcher/agent/**"],
-      "matchPackageNames": [
+        "/^@copilotkit/",
         "/^copilotkit/"
       ],
       "labels": ["copilotkit"],
