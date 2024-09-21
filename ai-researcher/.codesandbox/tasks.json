@@ -17,7 +17,7 @@
     "serve-agent": {
       "name": "Serve Agent",
       "command": "cd agent && poetry run demo",
-      "runAtStart": true,
+      "runAtStart": false,
       "restartOn": {
         "files": ["agent/.env"]
       }
@@ -25,7 +25,7 @@
     "serve-ui": {
       "name": "Serve UI",
       "command": "cd ui && pnpm run dev",
-      "runAtStart": true,
+      "runAtStart": false,
       "restartOn": {
         "files": ["ui/.env"]
       },
