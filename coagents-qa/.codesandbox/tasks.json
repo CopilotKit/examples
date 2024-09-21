@@ -17,12 +17,12 @@
     "serve-agent": {
       "name": "Serve Agent",
       "command": "cd agent && poetry run demo",
-      "runAtStart": false
+      "runAtStart": true
     },
     "serve-ui": {
       "name": "Serve UI",
       "command": "cd ui && pnpm run dev",
-      "runAtStart": false,
+      "runAtStart": true,
       "preview": {
         "port": 3000
       }
