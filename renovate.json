@@ -15,7 +15,7 @@
   },
   "packageRules": [
     {
-      "description": "[All] Ignore all NPM packages initially",
+      "description": "[All] Ignore all packages initially",
       "enabled": false,
       "matchPaths": ["**/*"],
       "matchPackageNames": [
@@ -24,7 +24,7 @@
       "labels": ["dependencies"]
     },
     {
-      "description": "Enable Renovate for CopilotKit packages only",
+      "description": "[All] Enable Renovate for CopilotKit packages only",
       "enabled": true,
       "matchPaths": [
         "ai-researcher/ui/**",
@@ -38,7 +38,7 @@
         "/^copilotkit/"
       ],
       "labels": ["copilotkit"],
-      "groupName": "AI Researcher CopilotKit dependencies"
+      "groupName": "CopilotKit dependencies"
     }
   ]
 }
