@@ -2,7 +2,7 @@
   "setupTasks": [
     {
       "name": "Install Poetry",
-      "command": "pipx install poetry"
+      "command": "curl -sSL https://install.python-poetry.org | python3 -"
     },
     {
       "name": "Install (Agent)",
