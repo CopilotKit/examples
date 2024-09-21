@@ -1,6 +1,6 @@
-# CoAgents Starter
+# Coagents Streaming Example
 
-**These instructions assume you are in the `starter/` directory**
+**These instructions assume you are in the `coagents-streaming/` directory**
 
 ## Running the Agent
 

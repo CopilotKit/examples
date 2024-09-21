@@ -1,6 +1,6 @@
-# CoAgents Starter
+# CoAgents Shared State Example
 
-**These instructions assume you are in the `starter/` directory**
+**These instructions assume you are in the `coagents-shared-state/` directory**
 
 ## Running the Agent
 

@@ -1,6 +1,6 @@
-# CoAgents Starter
+# CoAgents Agent Q&A Example
 
-**These instructions assume you are in the `starter/` directory**
+**These instructions assume you are in the `coagents-qa/` directory**
 
 ## Running the Agent
 
