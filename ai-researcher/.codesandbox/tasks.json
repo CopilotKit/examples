@@ -22,7 +22,7 @@
     "serve-ui": {
       "name": "Serve UI",
       "command": "cd ui && pnpm run dev",
-      "runAtStart": true
+      "runAtStart": true,
       "preview": {
         "port": 3000
       }
