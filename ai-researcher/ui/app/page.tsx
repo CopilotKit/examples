@@ -3,6 +3,7 @@
 import { ResearchWrapper } from "@/components/ResearchWrapper";
 import { ResearchProvider } from "@/lib/research-provider";
 import { CopilotKit } from "@copilotkit/react-core";
+import "@copilotkit/react-ui/styles.css";
 
 export default function Home() {
   return (

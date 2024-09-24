@@ -2,6 +2,7 @@
 
 import { CopilotKit } from "@copilotkit/react-core";
 import { Translator } from "./Translator";
+import "@copilotkit/react-ui/styles.css";
 
 export default function Home() {
   return (
