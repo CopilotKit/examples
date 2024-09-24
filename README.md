@@ -1,1 +1,3 @@
-👉 [Go to the CoAgent demo README](https://github.com/CopilotKit/examples/tree/main/ai-researcher)
+# THIS REPOSITORY IS DEPRECATED
+
+You can find all CopilotKit examples at [CopilotKit/examples](https://github.com/CopilotKit/Copilotkit/tree/main/examples)
